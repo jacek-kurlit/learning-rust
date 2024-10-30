@@ -39,6 +39,22 @@ impl Bar {
     }
 }
 
+#[allow(dead_code)]
+fn mod_str(mut a: &str) -> &str {
+    println!("a inside function: {:?}", a as *const _);
+    let v = &mut a;
+    *v = "mod";
+    println!("v inside function: {:?}", v as *const _);
+    a
+}
+
+//NOTE: this does not even compile
+// fn mod_as_mut(a: &mut str) -> &str {
+//     let v = a.as_mut();
+//     // *v = "mod";
+//     a
+// }
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -63,5 +79,14 @@ mod tests {
         };
         assert_eq!(bar.mod_with_as_mut(), Some(&"mod with as mut".to_string()));
         assert_eq!(bar.v, Some("mod with as mut".to_string()));
+    }
+
+    #[test]
+    fn str_mod() {
+        let a = "init";
+        println!("a before function: {:?}", a as *const _);
+        assert_eq!(mod_str(a), "mod");
+        assert_eq!(a, "init");
+        // assert_eq!(mod_as_mut(a.as_mut()), "mod");
     }
 }
