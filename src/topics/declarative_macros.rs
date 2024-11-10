@@ -23,7 +23,7 @@ macro_rules! avec {
 #[doc(hidden)]
 macro_rules! count {
     ($($element:expr),*) => {
-        //this is a bit crazy but itcreate array of unit type with length of number of arguments
+        //this is a bit crazy but it create array of unit type with length of number of arguments
         //then we return length of it
         //compiler can calculate it at compile time
         <[()]>::len(&[$($crate::count!(@SUBSTR; $element)),*])
