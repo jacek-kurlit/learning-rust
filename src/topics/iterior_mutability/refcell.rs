@@ -101,7 +101,7 @@ impl<T> DerefMut for RefMut<'_, T> {
     fn deref_mut(&mut self) -> &mut Self::Target {
         //SAFETY: a RefMut is only created if no other referenes were given ou.
         //Once it is given out, state is set to xclusive so no future refs are given out
-        //so we have an exclusive lease on inner value so mutable dereferencing is fine
+        //so we have an exclusive lease on shared value so mutable dereferencing is fine
         unsafe { &mut *self.refcell.value.get() }
     }
 }
