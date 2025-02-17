@@ -1,5 +1,4 @@
 use std::collections::vec_deque::VecDeque;
-use std::mem::swap;
 use std::sync::{Arc, Condvar, Mutex};
 
 struct Inner<T> {
@@ -90,7 +89,10 @@ pub fn channel<T>() -> (Sender<T>, Receiver<T>) {
         Sender {
             shared: shared.clone(),
         },
-        Receiver { shared },
+        Receiver {
+            shared,
+            buffer: VecDeque::new(),
+        },
     )
 }
 
