@@ -1,8 +1,10 @@
-mod declarative_macros;
-mod iterators;
-mod lifetime;
-mod iterior_mutability;
+mod async_await;
 mod channels;
+mod declarative_macros;
+mod drop_check;
+mod iterators;
+mod iterior_mutability;
+mod lifetime;
 mod sorting;
 mod subtyping;
-mod drop_check;
+mod closures;
